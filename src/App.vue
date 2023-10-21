@@ -1,28 +1,35 @@
 <template>
   <div>
-    <!-- Your fabulous Vue template -->
+    <canvas id="canvas"
+    ref="canvas"
+  ></canvas>
+
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { ref, onMounted,  defineComponent } from 'vue'
 import { IThreeHelper } from '@/helpers/threeHelpers/interfaces/IThreeHelper'
 import { ThreeHelper } from '@/helpers/threeHelpers/core/ThreeHelper'
 import { EnhancedThreeHelper } from '@/helpers/threeHelpers/core/EnhancedThreeHelper.ts'
 
 export default defineComponent({
-  name: 'YourComponent',
-  mounted() {
-    // Create an instance of ThreeHelper
-    const baseThreeHelper = new ThreeHelper()
+  setup() {
+    const canvas = ref<HTMLCanvasElement | null>(null);
 
-    // Decorate it with ThreeHelperDecorator
-    const decoratedThreeHelper: IThreeHelper = new EnhancedThreeHelper(baseThreeHelper)
+    onMounted(() => {
+      if (canvas.value) {
+        const baseThreeHelper = new ThreeHelper(canvas.value);
+        const decoratedThreeHelper: IThreeHelper = new EnhancedThreeHelper(baseThreeHelper);
+        decoratedThreeHelper.animate();
+      }
+    });
 
-    // Now you can call animate on the decorated instance
-    decoratedThreeHelper.animate()
+    return {
+      canvas
+    };
   }
-})
+});
 </script>
 <style scoped>
 header {

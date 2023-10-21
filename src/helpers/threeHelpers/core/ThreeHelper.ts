@@ -1,10 +1,9 @@
-import {ThreeScene} from './ThreeScene'
-import {ThreeCamera} from './ThreeCamera'
-import {ThreeControls} from './ThreeControls'
-import {ThreeRenderer} from './ThreeRenderer'
-import {ThreeGrid} from './ThreeGrid'
+import { ThreeScene } from './ThreeScene'
+import { ThreeCamera } from './ThreeCamera'
+import { ThreeControls } from './ThreeControls'
+import { ThreeRenderer } from './ThreeRenderer'
+import { ThreeGrid } from './ThreeGrid'
 import { MAX_SCALE } from './constants/ThreeConstants'
-
 
 export class ThreeHelper implements IThreeHelper {
   private scene: ThreeScene
@@ -14,12 +13,13 @@ export class ThreeHelper implements IThreeHelper {
   private grid: ThreeGrid
   private scale: number
 
-  constructor() {
-    this.scale = 0.01
 
+  constructor(private canvas?: HTMLCanvasElement) {
+    this.scale = 0.01
     this.scene = new ThreeScene()
     this.camera = new ThreeCamera(window.innerWidth / window.innerHeight)
-    this.renderer = new ThreeRenderer({ width: window.innerWidth, height: window.innerHeight })
+    // this.renderer = new ThreeRenderer({ width: window.innerWidth, height: window.innerHeight,  })
+    this.renderer = new ThreeRenderer( this.canvas )
     this.controls = new ThreeControls(this.camera.camera, this.renderer.renderer.domElement)
     this.grid = new ThreeGrid()
 
