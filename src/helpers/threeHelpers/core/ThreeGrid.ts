@@ -5,7 +5,7 @@ export class ThreeGrid {
   public grid: SimpleGrid
 
   constructor() {
-    this.grid = new SimpleGrid(new THREE.Color('white'), 10, 100)
+    this.grid = new SimpleGrid(new THREE.Color(0xDEE2E6), 10, 100)
     this.grid.fade = true
   }
 }

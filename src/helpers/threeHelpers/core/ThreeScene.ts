@@ -5,5 +5,6 @@ export class ThreeScene {
 
   constructor() {
     this.scene = new THREE.Scene()
+    this.scene.background = new THREE.Color(0x242635)
   }
 }
