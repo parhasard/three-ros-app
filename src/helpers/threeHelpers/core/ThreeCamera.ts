@@ -1,11 +1,12 @@
 import * as THREE from 'three'
 import { FOV, NEAR, FAR } from './constants/ThreeConstants'
 
-export class ThreeCamera {
+export class ThreeCamera extends THREE.PerspectiveCamera {
   public camera: THREE.PerspectiveCamera
 
   constructor(aspectRatio: number) {
-    this.camera = new THREE.PerspectiveCamera(FOV, aspectRatio, NEAR, FAR)
-    this.camera.position.set(60, 60, 60)
+    super(FOV, aspectRatio, NEAR, FAR)
+
+    this.position.set(60, 60, 60)
   }
 }

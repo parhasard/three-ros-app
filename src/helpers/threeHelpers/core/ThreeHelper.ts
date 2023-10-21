@@ -19,11 +19,11 @@ export class ThreeHelper implements IThreeHelper {
     this.scene = new ThreeScene()
     this.camera = new ThreeCamera(window.innerWidth / window.innerHeight)
     this.renderer = new ThreeRenderer(this.canvas)
-    this.controls = new ThreeControls(this.camera.camera, this.renderer.renderer.domElement)
+    this.controls = new ThreeControls(this.camera, this.renderer.domElement)
     this.grid = new ThreeGrid()
     this.lights = ThreeLights.createLights();
 
-    this.scene.add(this.grid.grid.getGridMesh())
+    this.scene.add(this.grid.getGridMesh())
     this.lights.forEach(light => this.scene.add(light))
     this.setupWindowResize(this.camera, this.renderer)
   }
@@ -46,11 +46,11 @@ export class ThreeHelper implements IThreeHelper {
       // animate grid expansion
       if (this.scale < MAX_SCALE) {
         this.scale += 0.005
-        this.grid.grid.getGridMesh().scale.set(this.scale, this.scale, this.scale)
+        this.grid.getGridMesh().scale.set(this.scale, this.scale, this.scale)
       }
 
-      this.controls.controls.update()
-      this.renderer.renderer.render(this.scene.scene, this.camera.camera)
+      this.controls.update()
+      this.renderer.render(this.scene, this.camera)
     }
     animateLoop()
   }

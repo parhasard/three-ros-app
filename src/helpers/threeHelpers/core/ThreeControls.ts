@@ -1,11 +1,12 @@
 import * as THREE from 'three'
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
 
-export class ThreeControls {
+export class ThreeControls extends OrbitControls {
   public controls: OrbitControls
 
   constructor(camera: THREE.PerspectiveCamera, element: HTMLElement) {
-    this.controls = new OrbitControls(camera, element)
-    this.controls.enableDamping = true
+    super(camera, element)
+
+    this.enableDamping = true
   }
 }
