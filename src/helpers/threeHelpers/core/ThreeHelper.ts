@@ -13,17 +13,27 @@ export class ThreeHelper implements IThreeHelper {
   private grid: ThreeGrid
   private scale: number
 
-
   constructor(private canvas?: HTMLCanvasElement) {
     this.scale = 0.01
     this.scene = new ThreeScene()
     this.camera = new ThreeCamera(window.innerWidth / window.innerHeight)
     // this.renderer = new ThreeRenderer({ width: window.innerWidth, height: window.innerHeight,  })
-    this.renderer = new ThreeRenderer( this.canvas )
+    this.renderer = new ThreeRenderer(this.canvas)
     this.controls = new ThreeControls(this.camera.camera, this.renderer.renderer.domElement)
     this.grid = new ThreeGrid()
 
     this.scene.scene.add(this.grid.grid.getGridMesh())
+    this.setupWindowResize(this.camera, this.renderer)
+  }
+  private setupWindowResize({ camera }: ThreeCamera, { renderer }: ThreeRenderer): void {
+    window.addEventListener('resize', () => {
+      const width = window.innerWidth
+      const height = window.innerHeight
+      camera.aspect = width / height
+      console.log(camera)
+      camera.updateProjectionMatrix()
+      renderer.setSize(width, height)
+    })
   }
 
   public animate(): void {
