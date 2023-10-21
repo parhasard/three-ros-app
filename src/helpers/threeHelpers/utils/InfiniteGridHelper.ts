@@ -1,24 +1,21 @@
-import * as THREE from "three";
+import * as THREE from 'three'
 
-export class SimpleGrid
-
-{
-
-    // Method to get the grid mesh
+export class SimpleGrid {
+  // Method to get the grid mesh
   getGridMesh(): THREE.Mesh {
-    return this._grid;
+    return this._grid
   }
 
-    get material() {
-        return this._grid.material as THREE.ShaderMaterial;
-      }
+  get material() {
+    return this._grid.material as THREE.ShaderMaterial
+  }
 
-        /**
+  /**
    * Whether the grid should fade away with distance. Recommended to be true for
    * perspective cameras and false for orthographic cameras.
    */
   get fade() {
-    return this._fade === 3;
+    return this._fade === 3
   }
 
   /**
@@ -26,12 +23,12 @@ export class SimpleGrid
    * perspective cameras and false for orthographic cameras.
    */
   set fade(active: boolean) {
-    this._fade = active ? 6 : 0;
-    this.material.uniforms.uFade.value = this._fade;
+    this._fade = active ? 6 : 0
+    this.material.uniforms.uFade.value = this._fade
   }
 
-  private readonly _grid: THREE.Mesh;
-  private _fade = 6;
+  private readonly _grid: THREE.Mesh
+  private _fade = 6
 
   constructor(
     color = new THREE.Color(0xbbbbbb),
@@ -39,30 +36,30 @@ export class SimpleGrid
     size2: number = 10,
     distance: number = 2000
   ) {
-    const geometry = new THREE.PlaneGeometry(2, 2, 1, 1);
+    const geometry = new THREE.PlaneGeometry(2, 2, 1, 1)
 
     const material = new THREE.ShaderMaterial({
       side: THREE.DoubleSide,
 
       uniforms: {
         uSize1: {
-          value: size1,
+          value: size1
         },
         uSize2: {
-          value: size2,
+          value: size2
         },
         uColor: {
-          value: color,
+          value: color
         },
         uDistance: {
-          value: distance,
+          value: distance
         },
         uFade: {
-          value: this._fade,
+          value: this._fade
         },
         uZoom: {
-          value: 1,
-        },
+          value: 1
+        }
       },
       transparent: true,
       vertexShader: `
@@ -131,15 +128,11 @@ export class SimpleGrid
             `,
 
       extensions: {
-        derivatives: true,
-      },
-    });
+        derivatives: true
+      }
+    })
 
-    this._grid = new THREE.Mesh(geometry, material);
-    this._grid.frustumCulled = false;
+    this._grid = new THREE.Mesh(geometry, material)
+    this._grid.frustumCulled = false
   }
-
 }
-
-
-

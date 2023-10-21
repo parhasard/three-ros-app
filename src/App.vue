@@ -5,16 +5,24 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-import { IThreeHelper, ThreeHelper } from './helpers/scene/threeHelper';
+import { defineComponent } from 'vue'
+import { IThreeHelper } from '@/helpers/threeHelpers/interfaces/IThreeHelper'
+import { ThreeHelper } from '@/helpers/threeHelpers/core/ThreeHelper'
+import { EnhancedThreeHelper } from '@/helpers/threeHelpers/core/EnhancedThreeHelper.ts'
 
 export default defineComponent({
   name: 'YourComponent',
   mounted() {
-    const threeInstance: IThreeHelper = ThreeHelper.factory();
-    threeInstance.animate();
-  },
-});
+    // Create an instance of ThreeHelper
+    const baseThreeHelper = new ThreeHelper()
+
+    // Decorate it with ThreeHelperDecorator
+    const decoratedThreeHelper: IThreeHelper = new EnhancedThreeHelper(baseThreeHelper)
+
+    // Now you can call animate on the decorated instance
+    decoratedThreeHelper.animate()
+  }
+})
 </script>
 <style scoped>
 header {
