@@ -1,7 +1,6 @@
 import * as THREE from 'three'
 
 export class ThreeScene extends THREE.Scene{
-  public scene: THREE.Scene
 
   constructor() {
     super();
