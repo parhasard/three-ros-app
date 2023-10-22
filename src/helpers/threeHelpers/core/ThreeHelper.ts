@@ -5,6 +5,7 @@ import { ThreeRenderer } from './ThreeRenderer'
 import { ThreeGrid } from './ThreeGrid'
 import { ThreeLights } from './ThreeLights'
 import { MAX_SCALE } from './constants/ThreeConstants'
+import type { IThreeHelper } from '../interfaces/IThreeHelper'
 
 export class ThreeHelper implements IThreeHelper {
   private scene: ThreeScene
@@ -13,7 +14,8 @@ export class ThreeHelper implements IThreeHelper {
   private controls: ThreeControls
   private grid: ThreeGrid
   private scale: number
-
+  private lights: ThreeLights
+  
   constructor(private canvas?: HTMLCanvasElement) {
     this.scale = 0.01
     this.scene = new ThreeScene()
@@ -21,15 +23,15 @@ export class ThreeHelper implements IThreeHelper {
     this.renderer = new ThreeRenderer(this.canvas)
     this.controls = new ThreeControls(this.camera, this.renderer.domElement)
     this.grid = new ThreeGrid()
-    this.lights = ThreeLights.createLights();
+    this.lights = new ThreeLights()
 
     this.scene.add(this.grid.getGridMesh())
-    this.lights.forEach(light => this.scene.add(light))
+    this.lights.forEach((light) => this.scene.add(light))
     this.setupWindowResize(this.camera, this.renderer)
   }
 
   // listen to window size changes
-  private setupWindowResize({ camera }: ThreeCamera, { renderer }: ThreeRenderer): void {
+  private setupWindowResize( camera: ThreeCamera, renderer: ThreeRenderer): void {
     window.addEventListener('resize', () => {
       const width = window.innerWidth
       const height = window.innerHeight
