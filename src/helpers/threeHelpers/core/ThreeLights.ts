@@ -1,4 +1,5 @@
-import { DirectionalLight, AmbientLight, Light } from 'three';
+import { DirectionalLight, AmbientLight, Light } from 'three'
+
 
 export class ThreeLights extends Array<Light>{
   constructor() {
@@ -10,5 +11,6 @@ export class ThreeLights extends Array<Light>{
     this[1].position.set(-1, 0.5, -1);
 
     this.push(new AmbientLight(0xffffee, 0.25));
+
   }
 }
