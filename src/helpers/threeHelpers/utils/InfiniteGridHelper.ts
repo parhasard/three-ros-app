@@ -1,5 +1,10 @@
 import * as THREE from 'three'
 
+/**
+ * An infinite grid originally created by [Fyrestar](https://github.com/Fyrestar/THREE.InfiniteGridHelper),
+ * now elegantly translated to TypeScript by [dkaraush](https://github.com/dkaraush/THREE.InfiniteGridHelper/blob/master/InfiniteGridHelper.ts).
+ * Inspired by the usage example at [IFCjs/components](https://github.com/IFCjs/components/blob/7b0e2ee8e8f150bcab2e362009b0333e52243b79/src/core/SimpleGrid/index.ts#L14).
+ */
 export class SimpleGrid {
   // Method to get the grid mesh
   getGridMesh(): THREE.Mesh {
